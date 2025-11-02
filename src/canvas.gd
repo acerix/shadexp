@@ -11,6 +11,8 @@ var zoom = 2.0
 #var palette_offset = 0
 var t = 0.0
 
+const ZOOM_MAX = 8;
+
 func get_viewport_aspect_ratio():
 	var viewport_size = get_viewport_rect().size
 	if viewport_size.y == 0:
@@ -27,8 +29,8 @@ func _process(delta):
 	t += delta
 	
 	#centre.x = 1 + 2 * sin(t)
-	#centre.y = 1 + 2 * sin(t)
-	zoom = 8 + 8 * sin(4*t)
+	#centre.y = 1 + 2 * cos(t)
+	zoom = ZOOM_MAX + ZOOM_MAX * sin(4*t)
 	
 	var viewport_aspect_ratio = get_viewport_aspect_ratio()
 	$".".material.set("shader_parameter/viewport_aspect_ratio", viewport_aspect_ratio)
