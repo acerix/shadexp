@@ -12,8 +12,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="Tabs" type="TabContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,11 +24,11 @@ grow_horizontal = 2
 grow_vertical = 2
 current_tab = 0
 
-[node name="Display" type="VBoxContainer" parent="TabContainer"]
+[node name="Display" type="VBoxContainer" parent="Tabs"]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="WindowMode" type="BoxContainer" parent="TabContainer/Display"]
+[node name="WindowMode" type="BoxContainer" parent="Tabs/Display"]
 layout_mode = 2
 script = ExtResource("1_dx5rv")
 scene = ExtResource("2_bc6a6")
@@ -34,7 +36,7 @@ property_name = "window_mode"
 view_name = "Window Mode"
 metadata/_custom_type_script = "uid://c3duy35ogqq07"
 
-[node name="VSync" type="BoxContainer" parent="TabContainer/Display"]
+[node name="VSync" type="BoxContainer" parent="Tabs/Display"]
 layout_mode = 2
 script = ExtResource("1_dx5rv")
 scene = ExtResource("2_bc6a6")
@@ -42,13 +44,15 @@ property_name = "v_sync"
 view_name = "V Sync"
 metadata/_custom_type_script = "uid://c3duy35ogqq07"
 
-[node name="Shader" type="VBoxContainer" parent="TabContainer"]
+[node name="Shader" type="VBoxContainer" parent="Tabs"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Iterations" type="BoxContainer" parent="TabContainer/Shader"]
+[node name="Iterations" type="BoxContainer" parent="Tabs/Shader"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
 script = ExtResource("3_vyiww")
 step = 1.0
 scene = ExtResource("4_ly5nh")
