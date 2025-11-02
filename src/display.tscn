@@ -8,7 +8,7 @@
 shader = ExtResource("1_mytll")
 shader_parameter/viewport_aspect_ratio = 1.0
 shader_parameter/centre = Vector2(0, 0)
-shader_parameter/zoom = 1.0
+shader_parameter/zoom = 2.0
 
 [node name="Display" type="Control"]
 layout_mode = 3

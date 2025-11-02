@@ -26,13 +26,15 @@ func _process(delta):
 	# var t = Time.get_unix_time_from_system()
 	t += delta
 	
-	centre.x = 1 + 2 * sin(t)
-	centre.y = 1 + 2 * sin(t)
-	zoom = 4 + 2 * sin(t)
+	#centre.x = 1 + 2 * sin(t)
+	#centre.y = 1 + 2 * sin(t)
+	zoom = 8 + 8 * sin(4*t)
 	
 	var viewport_aspect_ratio = get_viewport_aspect_ratio()
 	$".".material.set("shader_parameter/viewport_aspect_ratio", viewport_aspect_ratio)
 	
 	$".".material.set("shader_parameter/centre", centre)
 	$".".material.set("shader_parameter/zoom", zoom)
+	
+	#$".".material.set("shader_parameter/F", F)
 	
