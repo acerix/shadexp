@@ -8,8 +8,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbhi7"]
 shader = ExtResource("1_tbhi7")
 shader_parameter/viewport_aspect_ratio = 1.0
-shader_parameter/centre = Vector2(0, 1.666)
-shader_parameter/zoom = 666666.0
+shader_parameter/centre = Vector2(0, 1.445)
+shader_parameter/zoom = 66600.0
 shader_parameter/palette_image = ExtResource("2_txl3f")
 
 [node name="Display" type="Control"]

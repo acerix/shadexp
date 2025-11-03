@@ -7,16 +7,18 @@ uniform float zoom;
 #include "res://addons/glsl-arbitrary-precision/arbitrary.gdshaderinc"
 
 uniform sampler2D palette_image;
-const int max_iterations = 512;
+const int max_iterations = 256;
 
 // from https://github.com/RohanFredriksson/glsl-arbitrary-precision
-int mandelbrot2(vec2 c) {
+//int mandelbrot2(vec2 c) {
+	//
+	//// c = (real + img)
+    //uint c_r[ARRAY_SIZE];
+    //uint c_i[ARRAY_SIZE];
+	//load(c_r, -c.y);
+	//load(c_i, c.x);
 	
-	// c = (real + img)
-    uint c_r[ARRAY_SIZE];
-    uint c_i[ARRAY_SIZE];
-	load(c_r, -c.y);
-	load(c_i, c.x);
+int mandelbrot(uint[ARRAY_SIZE] c_r, uint[ARRAY_SIZE] c_i) {
 	
 	// z = 0
     uint z_r[ARRAY_SIZE];
@@ -74,31 +76,31 @@ int mandelbrot2(vec2 c) {
     return -1;
 }
 
-int mandelbrot(vec2 c) {
-    vec2 z = vec2(0, 0);
-    vec2 z2 = vec2(0, 0);
-	int i = 0;
-	// loop (z ↦ z²+c) until escaping or limit is reached
-    while (i++ < max_iterations) {
-		// return if point escapes circle of radius 2
-		if (z2.x + z2.y > 4.0) {
-			return i;
-		}
-        z = vec2(
-                2.0 * z.y * z.x - c.x,
-                z2.y - z2.x - c.y
-        );
-        z2 = z * z;
-    }
-    return -1;
-}
+//int mandelbrot(vec2 c) {
+    //vec2 z = vec2(0, 0);
+    //vec2 z2 = vec2(0, 0);
+	//int i = 0;
+	//// loop (z ↦ z²+c) until escaping or limit is reached
+    //while (i++ < max_iterations) {
+		//// return if point escapes circle of radius 2
+		//if (z2.x + z2.y > 4.0) {
+			//return i;
+		//}
+        //z = vec2(
+                //2.0 * z.y * z.x - c.x,
+                //z2.y - z2.x - c.y
+        //);
+        //z2 = z * z;
+    //}
+    //return -1;
+//}
 
 vec3 palette(int mz) {
 	if (mz == -1) {
 		return texelFetch(palette_image, ivec2(0, 0), 0).rgb;
 	}
 	int color_count = textureSize(palette_image, 0).x - 1;
-	mz += int(TIME*64.0);
+	mz += int(TIME*8.0);
 	vec3 color1 = texelFetch(palette_image, ivec2(1 + mz % color_count, 0), 0).rgb;
 	//vec3 color2 = texelFetch(palette_image, ivec2(1 + (mz + 1) % color_count, 0), 0).rgb;
 	//return mix(color1, color2, fract(m.z));
@@ -107,10 +109,30 @@ vec3 palette(int mz) {
 
 void fragment() {
 	// calculate coordinates of the point at this pixel
-	vec2 point = (UV - vec2(0.5)) * vec2(viewport_aspect_ratio, -1) / zoom + centre;
+	//vec2 point = (UV - vec2(0.5)) * vec2(viewport_aspect_ratio, -1) / zoom + centre;
+	vec2 point = (UV - vec2(0.5)) * vec2(viewport_aspect_ratio, 1);
+	
+	// c = (real + img)
+    uint c_r[ARRAY_SIZE];
+    uint c_i[ARRAY_SIZE];
+	load(c_r, point.y);
+	load(c_i, point.x);
+	
+    uint zoom_u[ARRAY_SIZE];
+	load(zoom_u, 1.0/zoom);
+	mul(c_r, zoom_u, c_r);
+	mul(c_i, zoom_u, c_i);
+
+    uint trans_r[ARRAY_SIZE];
+    uint trans_i[ARRAY_SIZE];
+	load(trans_r, -centre.y);
+	load(trans_i, centre.x);
+	add(c_r, trans_r, c_r);
+	add(c_i, trans_i, c_i);
 
 	// calculate the number of iterations for this point to escape the mandelbrot set
-    int iterations = mandelbrot2(point);
+    //int iterations = mandelbrot(point);
+	int iterations = mandelbrot(c_r, c_i);
 	
 	// colourizing iterations of escape
 	//float r = z == max_iterations ? 0.0 : 0.5;
