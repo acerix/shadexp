@@ -1,14 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://cl3r4kru12lw0"]
 
-[ext_resource type="Shader" uid="uid://oavkcrnwvcxs" path="res://models/grid-test/pixel.gdshader" id="1_mytll"]
 [ext_resource type="PackedScene" uid="uid://ccivujdp2ydos" path="res://dashboard.tscn" id="1_ru5jf"]
+[ext_resource type="Shader" uid="uid://4jqi52w52jml" path="res://models/mandelbrot/pixel.gdshader" id="1_tbhi7"]
 [ext_resource type="Script" uid="uid://8caf0rkfxlug" path="res://canvas.gd" id="2_tbhi7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbhi7"]
-shader = ExtResource("1_mytll")
-shader_parameter/viewport_aspect_ratio = 1.0
-shader_parameter/centre = Vector2(0, 0)
-shader_parameter/zoom = 2.0
+shader = ExtResource("1_tbhi7")
 
 [node name="Display" type="Control"]
 layout_mode = 3

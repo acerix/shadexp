@@ -1,0 +1,3 @@
+[submodule "src/addons/glsl-arbitrary-precision"]
+	path = src/addons/glsl-arbitrary-precision
+	url = git@github.com:RohanFredriksson/glsl-arbitrary-precision.git
