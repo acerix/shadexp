@@ -30,7 +30,15 @@ func _process(delta):
 	
 	#centre.x = 1 + 2 * sin(t)
 	#centre.y = 1 + 2 * cos(t)
-	zoom = ZOOM_MAX + ZOOM_MAX * sin(4*t)
+	#zoom = ZOOM_MAX + ZOOM_MAX * sin(4*t)
+	
+	# mandelbrot test
+	centre.x = 0
+	centre.y = 0.75
+	zoom = 2
+	#centre.x = sin(t)
+	#centre.y = 0.75 + sin(t)
+	#zoom = 2 + sin(t)
 	
 	var viewport_aspect_ratio = get_viewport_aspect_ratio()
 	$".".material.set("shader_parameter/viewport_aspect_ratio", viewport_aspect_ratio)

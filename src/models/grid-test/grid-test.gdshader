@@ -1,7 +1,5 @@
 shader_type canvas_item;
 
-#include "res://addons/glsl-arbitrary-precision/arbitrary.gdshaderinc"
-
 uniform float viewport_aspect_ratio;
 uniform vec2 centre;
 uniform float zoom;
